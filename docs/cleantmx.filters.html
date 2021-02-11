@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module cleantmx.filters</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong><a href="cleantmx.html"><font color="#ffffff">cleantmx</font></a>.filters</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/kuhlig/Documents/School/Winter2021/machine_translation/corpus/cleantmx/filters.py">/home/kuhlig/Documents/School/Winter2021/machine_translation/corpus/cleantmx/filters.py</a></font></td></tr></table>
+    <p></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#aa55cc">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Modules</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="cleantmx.charsets.html">cleantmx.charsets</a><br>
+</td><td width="25%" valign=top><a href="html.html">html</a><br>
+</td><td width="25%" valign=top><a href="re.html">re</a><br>
+</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-NormalizeQuotationEN"><strong>NormalizeQuotationEN</strong></a>(text: str) -&gt; Optional[str]</dt><dd><tt>Replace&nbsp;all&nbsp;quotation&nbsp;marks&nbsp;with&nbsp;standard&nbsp;symbols&nbsp;based&nbsp;on&nbsp;English&nbsp;quotation&nbsp;rules.<br>
+&nbsp;<br>
+All&nbsp;quotation&nbsp;marks&nbsp;in&nbsp;the&nbsp;Unicode&nbsp;category&nbsp;'Pi'&nbsp;(initial&nbsp;quotes)&nbsp;and&nbsp;'Pf'&nbsp;(final&nbsp;quotes)<br>
+with&nbsp;the&nbsp;word&nbsp;'SINGLE'&nbsp;in&nbsp;their&nbsp;Unicode&nbsp;name&nbsp;are&nbsp;replaced&nbsp;with&nbsp;'\x27'&nbsp;('APOSTROPHE').<br>
+All&nbsp;others&nbsp;are&nbsp;replaced&nbsp;with&nbsp;'\x22'&nbsp;('QUOTATION&nbsp;MARK').</tt></dd></dl>
+ <dl><dt><a name="-NormalizeQuotationSV"><strong>NormalizeQuotationSV</strong></a>(text: str) -&gt; Optional[str]</dt><dd><tt>Replace&nbsp;all&nbsp;quotation&nbsp;marks&nbsp;with&nbsp;standard&nbsp;symbols&nbsp;based&nbsp;on&nbsp;Swedish&nbsp;quotation&nbsp;rules.<br>
+&nbsp;<br>
+All&nbsp;quotation&nbsp;marks&nbsp;in&nbsp;the&nbsp;Unicode&nbsp;category&nbsp;'Pi'&nbsp;(initial&nbsp;quotes)&nbsp;and&nbsp;'Pf'&nbsp;(final&nbsp;quotes)<br>
+with&nbsp;the&nbsp;word&nbsp;'SINGLE'&nbsp;in&nbsp;their&nbsp;Unicode&nbsp;name&nbsp;are&nbsp;replaced&nbsp;with&nbsp;'\u2019'&nbsp;('RIGHT&nbsp;SINGLE&nbsp;QUOTATION&nbsp;MARK').<br>
+All&nbsp;others&nbsp;are&nbsp;replaced&nbsp;with&nbsp;'\u201D'&nbsp;('RIGHT&nbsp;DOUBLE&nbsp;QUOTATION&nbsp;MARK').</tt></dd></dl>
+ <dl><dt><a name="-NormalizeWhitespace"><strong>NormalizeWhitespace</strong></a>(text: str) -&gt; Optional[str]</dt><dd><tt>Replace&nbsp;all&nbsp;whitespace&nbsp;in&nbsp;the&nbsp;Unicode&nbsp;category&nbsp;'Z'&nbsp;with&nbsp;a&nbsp;single&nbsp;space</tt></dd></dl>
+ <dl><dt><a name="-RemoveEmpty"><strong>RemoveEmpty</strong></a> = _RemoveSmaller(text: str) -&gt; Optional[str]</dt><dd><tt>Remove&nbsp;all&nbsp;empty&nbsp;entries</tt></dd></dl>
+ <dl><dt><a name="-RemoveLarger"><strong>RemoveLarger</strong></a>(max_length: int) -&gt; Callable[[str], Optional[str]]</dt><dd><tt>Remove&nbsp;all&nbsp;entries&nbsp;longer&nbsp;than&nbsp;`max_length`<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;max_length:&nbsp;The&nbsp;maximum&nbsp;length&nbsp;in&nbsp;characters.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;filter&nbsp;function&nbsp;which&nbsp;removes&nbsp;all&nbsp;entries&nbsp;with&nbsp;more&nbsp;than&nbsp;`max_length`&nbsp;characters</tt></dd></dl>
+ <dl><dt><a name="-RemoveNonText"><strong>RemoveNonText</strong></a>(min_token_length: int, max_token_length: int) -&gt; Callable[[str], Optional[str]]</dt><dd><tt>Removes&nbsp;segments&nbsp;suspected&nbsp;of&nbsp;being&nbsp;non-text&nbsp;content.<br>
+&nbsp;<br>
+It&nbsp;does&nbsp;so&nbsp;by&nbsp;calculating&nbsp;`text`'s&nbsp;average&nbsp;token&nbsp;length,&nbsp;split&nbsp;by&nbsp;whitespace.<br>
+If&nbsp;this&nbsp;is&nbsp;above&nbsp;`max_token_length`&nbsp;or&nbsp;below&nbsp;`min_token_length`,&nbsp;it&nbsp;rejects&nbsp;the&nbsp;text.&nbsp;It&nbsp;is&nbsp;suggested&nbsp;that<br>
+the&nbsp;user&nbsp;examine&nbsp;the&nbsp;corpora&nbsp;they&nbsp;would&nbsp;like&nbsp;to&nbsp;use&nbsp;to&nbsp;choose&nbsp;the&nbsp;proper&nbsp;value&nbsp;for<br>
+`max_token_length`,&nbsp;as&nbsp;this&nbsp;will&nbsp;vary&nbsp;by&nbsp;language.&nbsp;A&nbsp;recommended&nbsp;value&nbsp;is&nbsp;`m&nbsp;+&nbsp;3*std`,<br>
+where&nbsp;`m`&nbsp;is&nbsp;the&nbsp;mean&nbsp;token&nbsp;length&nbsp;in&nbsp;the&nbsp;corpus&nbsp;and&nbsp;`std`&nbsp;is&nbsp;the&nbsp;standard&nbsp;distribution&nbsp;<br>
+of&nbsp;the&nbsp;token&nbsp;length.</tt></dd></dl>
+ <dl><dt><a name="-RemoveOnSourceTargetRatio"><strong>RemoveOnSourceTargetRatio</strong></a>(max_ratio: float) -&gt; Callable[[Tuple[str, str]], Optional[Tuple[str, str]]]</dt><dd><tt>Remove&nbsp;all&nbsp;units&nbsp;with&nbsp;a&nbsp;source&nbsp;to&nbsp;target&nbsp;or&nbsp;target&nbsp;to&nbsp;source&nbsp;character&nbsp;ratio&nbsp;larger&nbsp;than&nbsp;`max_ratio`.</tt></dd></dl>
+ <dl><dt><a name="-RemoveOnWordcount"><strong>RemoveOnWordcount</strong></a>(min_wordcount: int, max_wordcount: int) -&gt; Callable[[str], Optional[str]]</dt><dd><tt>Remove&nbsp;all&nbsp;segments&nbsp;with&nbsp;less&nbsp;than&nbsp;`min_wordcount`&nbsp;tokens&nbsp;or&nbsp;more&nbsp;than&nbsp;`max_wordcount`&nbsp;tokens&nbsp;(split&nbsp;by&nbsp;whitespace).</tt></dd></dl>
+ <dl><dt><a name="-RemoveSmaller"><strong>RemoveSmaller</strong></a>(min_length: int) -&gt; Callable[[str], Optional[str]]</dt><dd><tt>Remove&nbsp;all&nbsp;entries&nbsp;shorter&nbsp;than&nbsp;`min_length`<br>
+&nbsp;<br>
+Args:<br>
+&nbsp;&nbsp;min_length:&nbsp;The&nbsp;minimum&nbsp;length&nbsp;in&nbsp;characters.<br>
+&nbsp;<br>
+Returns:<br>
+&nbsp;&nbsp;A&nbsp;filter&nbsp;function&nbsp;which&nbsp;removes&nbsp;all&nbsp;entries&nbsp;with&nbsp;less&nbsp;than&nbsp;`min_length`&nbsp;characters</tt></dd></dl>
+ <dl><dt><a name="-RemoveXML"><strong>RemoveXML</strong></a>(text: str) -&gt; Optional[str]</dt><dd><tt>Remove&nbsp;all&nbsp;XML&nbsp;markup&nbsp;in&nbsp;the&nbsp;text&nbsp;(including&nbsp;HTML&nbsp;markup)</tt></dd></dl>
+ <dl><dt><a name="-Replace"><strong>Replace</strong></a>(input_set: Union[Iterable[&lt;built-in function chr&gt;], &lt;built-in function chr&gt;], output: &lt;built-in function chr&gt;) -&gt; Callable[[str], Optional[str]]</dt><dd><tt>Replace&nbsp;characters&nbsp;in&nbsp;`input_set`&nbsp;with&nbsp;the&nbsp;character&nbsp;`output`</tt></dd></dl>
+ <dl><dt><a name="-UnescapeHTML"><strong>UnescapeHTML</strong></a>(text: str) -&gt; Optional[str]</dt><dd><tt>Replace&nbsp;HTML&nbsp;escape&nbsp;sequences&nbsp;with&nbsp;their&nbsp;Unicode&nbsp;values</tt></dd></dl>
+ <dl><dt><a name="-UnescapeStandard"><strong>UnescapeStandard</strong></a>(text: str) -&gt; Optional[str]</dt><dd><tt>Replace&nbsp;standard&nbsp;C-style&nbsp;escape&nbsp;codes&nbsp;with&nbsp;their&nbsp;Unicode&nbsp;values</tt></dd></dl>
+</td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#55aa55">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><strong>__all__</strong> = ['RemoveSmaller', 'RemoveLarger', 'RemoveEmpty', 'UnescapeHTML', 'UnescapeStandard', 'NormalizeWhitespace', 'Replace', 'NormalizeQuotationEN', 'NormalizeQuotationSV', 'RemoveXML', 'RemoveNonText', 'RemoveOnWordcount', 'RemoveOnSourceTargetRatio']</td></tr></table>
+</body></html>
